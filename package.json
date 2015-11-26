@@ -19,6 +19,8 @@
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "mongoose": "^4.2.8",
-    "passport": "^0.3.2"
+    "nconfig": "0.0.6",
+    "passport": "^0.3.2",
+    "underscore": "^1.8.3"
   }
 }
