@@ -1,8 +1,13 @@
-var express = require('express');
-var ejs = require('ejs');
-var http = require('http');
+var express = require('express'),
+    ejs = require('ejs'),
+    bodyParser = require('body-parser'),
+    morgan = require('morgan'),
+    nconfig = require('nconfig'),
+    http = require('http'),
+    app = express();
 
-var app = express();
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());    
 
 // Web Interface API gateway 
 
