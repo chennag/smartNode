@@ -1,0 +1,31 @@
+<div class="page-header">
+	<h1>
+		Records
+	</h1>
+</div>
+<div class="jumbotron text-center" ng-show="record.processing">
+	<span class="glyphicon glyphicon-repeat spinner"></span>
+	<p>Loading Records...</p>
+</div>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>_id</th>
+			<th>Sno</th>
+			<th>Type</th>
+			<th>Description</th>
+			<th>Status</th>
+			<th>Approval user</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="rec in record.records">
+			<td>{{ rec._id }}</td>
+			<td>{{ rec.sno }}
+			<td>{{ rec.type }}</td>
+			<td>{{ rec.description }}</td>
+			<td>{{ rec.status }}</td>
+            <td>{{ rec.approval_user}}</td>			
+		</tr>
+	</tbody>
+</table>
