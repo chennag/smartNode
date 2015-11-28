@@ -118,7 +118,7 @@ module.exports = function(app, express) {
 			user.name = req.body.name;  
 			user.username = req.body.username;  
 			user.password = req.body.password;  
-
+            user.type = req.body.type;
 			user.save(function(err) {
 				if (err) {
 					if (err.code == 11000) 
@@ -150,6 +150,7 @@ module.exports = function(app, express) {
 				if (req.body.name) user.name = req.body.name;
 				if (req.body.username) user.username = req.body.username;
 				if (req.body.password) user.password = req.body.password;
+				if (req.body.type) user.type = req.body.type;
 				user.save(function(err) {
 					if (err) res.send(err);
 					res.json({ message: 'User updated!' });

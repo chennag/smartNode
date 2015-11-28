@@ -1,9 +1,18 @@
-main 					{
-	padding-top:30px;	
+/* main div */
+main{
+	padding-top:5px;	
 }
 
-/* HEADER 
-===================== */
+.login {
+	padding-top: 50px;
+}
+
+.home {
+	padding-top: 50px;
+	margin-top: 50px;
+}
+
+/* Header */
 header .navbar 		{ 
 	border-radius:0;
 }
@@ -11,8 +20,11 @@ header .navbar 		{
 .navbar-brand {
 	color:white;
 }
-/* NGANIMATE
-====================== */
+
+/* Container */
+.container{
+	padding-top:0px;
+}
 
 /* show and hide */
 .show-hide-message.ng-hide-remove {
@@ -21,8 +33,7 @@ header .navbar 		{
 	animation:zoomIn 0.3s both ease;
 }
 
-/* ANIMATIONS
-====================== */
+/* animations */
 .spinner {
 	-webkit-animation:spin 1s infinite;
 	-moz-animation:spin 1s infinite;

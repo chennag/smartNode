@@ -21,6 +21,9 @@ mongoose.connect(config.database);
 var apiRoutes = require('./app/routes/api')(app, express);
 app.use('/api', apiRoutes);
 
+var mobiRoutes = require('./app/routes/mobiapi')(app,express);
+app.use('/mobiapi',mobiRoutes);
+
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });

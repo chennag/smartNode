@@ -13,6 +13,16 @@
 	</div>
 
 	<div class="form-group">
+		<label class="col-sm-2 control-label">Type</label>
+		<div class="col-sm-6">
+			<select class="form-control" id="ptype" ng-model="user.userData.type">
+				<option value="employee">Employee</option>
+				<option value="agent">Agent</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="form-group">
 		<label class="col-sm-2 control-label">Username</label>
 		<div class="col-sm-6">
 			<input type="text" class="form-control" ng-model="user.userData.username">
@@ -25,6 +35,7 @@
 			<input type="password" class="form-control" ng-model="user.userData.password">
 		</div>
 	</div>
+
 	
 	<div class="form-group">
 	<div class="col-sm-offset-2 col-sm-6">
@@ -36,11 +47,9 @@
 </form>
 
 <div class="row show-hide-message" ng-show="user.message">
-	<div class="col-sm-6 col-sm-offset-2">
-		
+	<div class="col-sm-6 col-sm-offset-2">		
 		<div class="alert alert-info">
 			{{ user.message }}
 		</div>
-
 	</div>
 </div>
