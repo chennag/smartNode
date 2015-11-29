@@ -80,20 +80,18 @@ module.exports = function(app, express) {
 			})
 		});
   
-    apiRouter.route('/records/:rec_id')
+    apiRouter.route('/records/:id')
     	.get(function(req,res){
-    		Record.findById(req.params.rec_id,function(err,records){
+    		Record.findById(req.params.id,function(err,records){
     			if(err)	res.send(err);
     			 res.json(records);
     		})
     	})
-    	.put(function(req,res){
-   			Record.findById(req.params.rec_id, function(err, record) {
+    	.patch(function(req,res){
+   			console.log(req.params.id,req.body.status);
+   			Record.findById(req.params.id, function(err, record) {
 				if (err) res.send(err);
-				if (req.body.type) record.type = req.body.type;
-				if (req.body.description) record.description = req.body.description;
 				if (req.body.status)  record.status = req.body.status;
-				if (req.body.approval_user) record.approval_user = req.body.approval_user;
 				record.save(function(err) {
 					if (err) res.send(err);
 					res.json({ message: 'Record updated!' });
@@ -103,7 +101,7 @@ module.exports = function(app, express) {
     	})
     	.delete(function(req,res){
     		Record.remove({
-				_id: req.params.rec_id
+				_id: req.params.id
 			}, function(err, record) {
 				if (err) res.send(err);
 				res.json({ message: 'Record Successfully deleted' });

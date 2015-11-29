@@ -26,6 +26,12 @@ header .navbar 		{
 	padding-top:0px;
 }
 
+
+/* hide id values for tables in both users and records */
+.hideid{
+	display:none;
+}
+
 /* show and hide */
 .show-hide-message.ng-hide-remove {
 	-webkit-animation:zoomIn 0.3s both ease;

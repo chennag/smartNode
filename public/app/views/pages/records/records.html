@@ -8,22 +8,28 @@
 <table class="table table-bordered table-striped">
 	<thead>
 		<tr>
-			<th>_id</th>
+			<th class="hideid">_id</th>
 			<th>Sno</th>
 			<th>Type</th>
 			<th>Description</th>
-			<th>Status</th>
 			<th>Approval user</th>
+			<th>Status</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="rec in record.records">
-			<td>{{ rec._id }}</td>
+			<td class="hideid">{{ rec._id }}</td>
 			<td>{{ rec.sno }}
 			<td>{{ rec.type }}</td>
 			<td>{{ rec.description }}</td>
-			<td>{{ rec.status }}</td>
-            <td>{{ rec.approval_user}}</td>			
+            <td>{{ rec.approval_user}}</td>
+            <td>
+            	<select id="status_id" ng-options="state.code as state.name for state in record.states" ng-model="state" ng-init="state = rec.status">
+            	</select>
+            </td>
+            <td>
+            	<a href="#" ng-if="rec.status == 'Requested'" ng-click="record.updateRecord(rec._id,state)" class="btn btn-default">Approve</a>
+            </td>		
 		</tr>
 	</tbody>
 </table>

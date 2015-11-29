@@ -27,7 +27,7 @@ module.exports = function(app,express){
             record.approval_user = req.body.approval_user;
 			record.save(function(err) {
 				if (err) return res.send(err);
-				res.json({ message: 'User created!' });
+				res.json({ message: 'Record created!' });
 			});
 
 		})
