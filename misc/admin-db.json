@@ -1,0 +1,7 @@
+{ 
+    "type" : "employee", 
+    "password" : "$2a$10$96af4cVeY0zgo1FYnILmJumEde9G0Ky0lo2dRwdBtuiKHhx0.KxdK", 
+    "username" : "admin", 
+    "name" : "admin"
+}
+
