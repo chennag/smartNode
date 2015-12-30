@@ -1,35 +1,37 @@
 <div class="page-header">
-	<h3>Records</h3>
+    <h3>Records</h3>
 </div>
 <div class="jumbotron text-center" ng-show="record.processing">
-	<span class="glyphicon glyphicon-repeat spinner"></span>
-	<p>Loading Records...</p>
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading Records...</p>
 </div>
-<table class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th class="hideid">_id</th>
-			<th>Sno</th>
-			<th>Type</th>
-			<th>Description</th>
-			<th>Approval user</th>
-			<th>Status</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="rec in record.records">
-			<td class="hideid">{{ rec._id }}</td>
-			<td>{{ rec.sno }}
-			<td>{{ rec.type }}</td>
-			<td>{{ rec.description }}</td>
-            <td>{{ rec.approval_user}}</td>
-            <td>
-            	<select id="status_id" ng-options="state.code as state.name for state in record.states" ng-model="state" ng-init="state = rec.status">
-            	</select>
-            </td>
-            <td>
-            	<a href="#" ng-if="rec.status == 'Requested'" ng-click="record.updateRecord(rec._id,state)" class="btn btn-default">Approve</a>
-            </td>		
-		</tr>
-	</tbody>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="hideid">_id</th>
+            <th>SAN no</th>
+            <th>Vessel Code</th>
+            <th>Vessel Name</th>
+            <th>Doc Num</th>
+            <th>Doc Date </th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="rec in record.records">
+            <td class="hideid">{{ rec._id }}</td>
+            <td>{{ rec.sanno }}
+                <td>{{ rec.vessel_code }}</td>
+                <td>{{ rec.vessel_name }}</td>
+                <td>{{ rec.docnum }}</td>
+                <td>{{ rec.doc_date | date:'dd-MM-yyyy'}}</td>
+                <td>
+                    <select id="status_id" ng-options="state.code as state.name for state in record.states" ng-model="state" ng-init="state = rec.status">
+                    </select>
+                </td>
+                <td ng-if="rec.status == 'Requested'">
+                    <a href="#" ng-click="record.updateRecord(rec._id,state)" class="btn btn-default">Approve</a>
+                </td>
+        </tr>
+    </tbody>
 </table>

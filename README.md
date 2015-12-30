@@ -1,0 +1,2 @@
+# smartport-node
+npm install

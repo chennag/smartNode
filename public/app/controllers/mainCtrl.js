@@ -23,7 +23,7 @@ angular.module('mainCtrl', [])
 			.success(function(data) {
 				vm.processing = false;	
 				if (data.success)			
-					$location.path('/records');
+					$location.path('/');
 				else 
 					vm.error = data.message;				
 			});

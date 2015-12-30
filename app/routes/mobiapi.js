@@ -1,8 +1,9 @@
-var bodyParser = require('body-parser'); 	
-var User       = require('../models/user');
-var Record     = require('../models/record');
-var jwt        = require('jsonwebtoken');
-var config     = require('../../config');
+var bodyParser = require('body-parser'),
+    moment     = require('moment'),
+    User       = require('../models/user'),
+    Record     = require('../models/record'),
+    jwt        = require('jsonwebtoken'),
+    config     = require('../../config');
 
 module.exports = function(app,express){
 	var mobiRouter = express.Router();
@@ -19,14 +20,19 @@ module.exports = function(app,express){
   			})
 	     })
 	     .post(function(req, res) {			
-			var record = new Record();		
-			record.sno = req.body.sno;  
-			record.description = req.body.description;  
-			record.type = req.body.type;  
+			var record = new Record();
+			console.log(req.body);		
+			record.sanno = req.body.sanno;  
+			record.vessel_code = req.body.vessel_code;  
+			record.vessel_name = req.body.vessel_name  
             record.status = req.body.status
-            record.approval_user = req.body.approval_user;
+            record.docnum = req.body.docnum;
+            record.doc_date = req.body.doc_date;
 			record.save(function(err) {
-				if (err) return res.send(err);
+				if (err) { 
+					console.log(err);
+					return res.send(err);
+				}
 				res.json({ message: 'Record created!' });
 			});
 

@@ -1,6 +1,5 @@
 angular.module('recordCtrl', ['recordService'])
 .controller('recordController', function(Record) {
-    console.log('in mani controller');
 	var vm = this;
 	vm.processing = true;
 	vm.states = [
@@ -13,12 +12,11 @@ angular.module('recordCtrl', ['recordService'])
 			vm.records = data;
 		});
 	vm.updateRecord = function(id,state){
-		console.log(id);
 		var set = {};
 		set.status = state;
 		Record.update(id,set)
-		      .success(function(msg){
-		        console.log(msg);
+		    .success(function(res){
+		     console.log(res);
 		});
 	}	
 });

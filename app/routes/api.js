@@ -3,6 +3,8 @@ var User       = require('../models/user');
 var Record     = require('../models/record');
 var jwt        = require('jsonwebtoken');
 var config     = require('../../config');
+var request	   = require('request');
+var sn         = require('../sn/servicenow');
 
 
 var superSecret = config.secret;
@@ -87,11 +89,18 @@ module.exports = function(app, express) {
     			 res.json(records);
     		})
     	})
-    	.patch(function(req,res){
-   			console.log(req.params.id,req.body.status);
+    	.put(function(req,res){
    			Record.findById(req.params.id, function(err, record) {
 				if (err) res.send(err);
-				if (req.body.status)  record.status = req.body.status;
+				if (req.body.status)  {
+					// sn.postRecords(record,function(error,response){
+					// 	if(!err){
+					// 		console.log(response);
+					// 	}
+					// 	else console.log(error)
+					// });
+					record.status = req.body.status;
+				}
 				record.save(function(err) {
 					if (err) res.send(err);
 					res.json({ message: 'Record updated!' });
