@@ -55,10 +55,6 @@ app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 });
 
-// var server = http.createServer(app).listen(config.port);
-// server.on('close', function() {
-//     console.log('terminating server');
-// });
 
 app.listen(config.port);
 
