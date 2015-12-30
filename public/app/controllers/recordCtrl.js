@@ -19,5 +19,32 @@ angular.module('recordCtrl', ['recordService'])
 		     console.log(res);
 		});
 	}	
-});
+})
+// create new record controller
+.controller('recordCreateController', function(Record){
+	console.log('in recordCreateController');
+	var vm = this;
+	vm.show = false;
+    vm.message = "";
+	
+    vm.hideMessage = function(){
+    	setTimeout(function(){
+    		vm.show = false;
+    	},1000)
+    }
+	vm.insertRecord = function(){
+        Record.insert(vm.recData)
+           .success(function(data) {
+				console.log(data.message);
+				vm.show = true;
+				vm.message = data.message;
+				vm.recData = {};
+				vm.hideMessage();
+			});	
+	}
+})
+// edit existing record controller 
+.controller('recordEditController',function(Record){
+   var vm = this;
+})
 

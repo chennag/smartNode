@@ -26,6 +26,10 @@ header .navbar 		{
 	padding-top:0px;
 }
 
+/* Paragaphs for alerts */
+.alert{
+	font-size: 15px;
+}
 
 /* hide id values for tables in both users and records */
 .hideid{

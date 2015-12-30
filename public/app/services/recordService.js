@@ -8,5 +8,8 @@ angular.module('recordService', [])
 	recordFactory.update = function(id,set){
 		return $http.put('/api/records/' + id,set);
 	};
+	recordFactory.insert = function(set){
+		return $http.post('/api/records',set);
+	}
 	return recordFactory;
 });

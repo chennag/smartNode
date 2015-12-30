@@ -6,11 +6,6 @@ angular.module('app.routes', ['ngRoute'])
 		.when('/', {
 			templateUrl : 'app/views/pages/home.html'
 		})
-		.when('/records',{
-            templateUrl: 'app/views/pages/records/records.html',
-            controller: 'recordController',
-            controllerAs: 'record'
-		})
 		.when('/login', {
 			templateUrl : 'app/views/pages/login.html',
    			controller  : 'mainController',
@@ -30,6 +25,16 @@ angular.module('app.routes', ['ngRoute'])
 			templateUrl: 'app/views/pages/users/single.html',
 			controller: 'userEditController',
 			controllerAs: 'user'
+		})
+		.when('/records',{
+            templateUrl: 'app/views/pages/records/records.html',
+            controller: 'recordController',
+            controllerAs: 'record'
+		})
+		.when('/records/create',{
+			templateUrl: 'app/views/pages/records/newrecord.html',
+			controller: 'recordCreateController',
+			controllerAs: 'record'
 		})
 		.when('/reports',{
 			templateUrl: 'app/views/pages/reports/reports.html'

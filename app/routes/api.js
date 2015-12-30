@@ -1,10 +1,10 @@
-var bodyParser = require('body-parser'); 	
-var User       = require('../models/user');
-var Record     = require('../models/record');
-var jwt        = require('jsonwebtoken');
-var config     = require('../../config');
-var request	   = require('request');
-var sn         = require('../sn/servicenow');
+var bodyParser = require('body-parser'),
+    moment     = require('moment'),
+    jwt        = require('jsonwebtoken'), 	
+    User       = require('../models/user'),
+    Record     = require('../models/record'),
+    config     = require('../../config'),
+    sn         = require('../sn/servicenow');
 
 
 var superSecret = config.secret;
@@ -80,6 +80,21 @@ module.exports = function(app, express) {
 			   if(err) res.send(err);
                res.json(records);
 			})
+		})
+		.post(function(req,res){
+			var record = new Record();
+			record.sanno = req.body.sanno;
+			record.vessel_code = req.body.vessel_code;
+			record.vessel_name = req.body.vessel_name;
+			record.docnum = req.body.docnum;
+			record.doc_date = moment(req.body.doc_date).format('MM/DD/YYYY'); // format date MM/DD/YYYY using moment
+			record.status = req.body.status;
+			record.save(function(err){
+				if(err){
+					res.send(err);
+				}
+				res.json({ message: '!! Record Succesfully Created !!' });
+			})
 		});
   
     apiRouter.route('/records/:id')
@@ -103,7 +118,7 @@ module.exports = function(app, express) {
 				}
 				record.save(function(err) {
 					if (err) res.send(err);
-					res.json({ message: 'Record updated!' });
+					res.json({ message: '!! Record Succesfully updated !!' });
 				});
 
 			});
