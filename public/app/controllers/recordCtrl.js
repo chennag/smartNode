@@ -1,7 +1,9 @@
 angular.module('recordCtrl', ['recordService'])
-.controller('recordController', function(Record) {
+.controller('recordController', function($timeout,Record) {
 	var vm = this;
 	vm.processing = true;
+	vm.show = false;
+	vm.message = "";
 	vm.states = [
 		{"name":"Requested","code":"Requested"},
   		{"name":"Processed","code":"Processed"}
@@ -15,9 +17,15 @@ angular.module('recordCtrl', ['recordService'])
 		var set = {};
 		set.status = state;
 		Record.update(id,set)
-		    .success(function(res){
-		     console.log(res);
-		});
+		    .success(function(data){
+		     vm.show = true;	
+		     vm.message = "!! Record Successfully Processed";
+		     $timeout(function(){
+		     	vm.show = false;
+		     },6000)
+		}).error(function(err){
+		    console.log(err);
+		})
 	}	
 })
 // create new record controller
