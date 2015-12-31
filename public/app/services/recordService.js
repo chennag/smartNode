@@ -8,14 +8,14 @@ angular.module('recordService', [])
 	recordFactory.get = function(id){   // get record by id 
        return $http.get('/api/records/'+id);
 	};
-	recordFactory.update = function(id,set){  // update only status field
-		return $http.put('/api/records/' + id,set);
+	recordFactory.update = function(id,set){  // update only status field and sync with servicenow
+		return $http.patch('/api/records/' + id,set);
 	};
 	recordFactory.edit = function(id,set){  // update all fields in a record
-
-	}
+        return $http.put('/api/records/' + id,set);
+	};
 	recordFactory.insert = function(set){    // create/insert new record 
 		return $http.post('/api/records',set);
-	}
+	};
 	return recordFactory;
 });

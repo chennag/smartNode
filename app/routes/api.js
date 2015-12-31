@@ -105,6 +105,21 @@ module.exports = function(app, express) {
     		})
     	})
     	.put(function(req,res){
+    		Record.findById(req.params.id, function(err,record){
+    			if(err) res.send(err);
+    			if(req.body.sanno) record.sanno = req.body.sanno;
+    			if(req.body.vessel_name) record.vessel_name = req.body.vessel_name;
+    			if(req.body.vessel_code) record.vessel_code = req.body.vessel_code;
+    			if(req.body.status) record.status = req.body.status;
+    			if(req.body.docnum) record.docnum = req.body.docnum;
+    			if(req.body.doc_date) record.doc_date = moment(req.body.doc_date).format('DD/MM/YYYY'); 
+    			record.save(function(err){
+    				if(err) res.send(err);
+    				res.send({message:'!! Record Succesfully Updated !!'});
+    			})
+    		})
+    	})
+    	.patch(function(req,res){
    			Record.findById(req.params.id, function(err, record) {
 				if (err) res.send(err);
 				if (req.body.status)  {

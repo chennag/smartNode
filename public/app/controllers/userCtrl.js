@@ -59,7 +59,7 @@ angular.module('userCtrl', ['userService'])
 				vm.processing = false;
 				vm.userData = {};
 				vm.message = data.message;
-			});
+			})
 	};
 
 });

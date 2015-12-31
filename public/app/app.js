@@ -1,4 +1,4 @@
-angular.module('psipApp', ['ngAnimate', 'app.routes', 'authService', 'mainCtrl', 'userCtrl', 'userService', 'recordCtrl', 'recordService'])
+angular.module('psipApp', ['ngAnimate', 'app.routes', 'authService', 'mainCtrl', 'userCtrl', 'userService', 'msgService','recordCtrl', 'recordService'])
 
 // application configuration to integrate token into requests
 .config(function($httpProvider) {

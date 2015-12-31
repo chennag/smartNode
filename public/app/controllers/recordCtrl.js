@@ -1,4 +1,4 @@
-angular.module('recordCtrl', ['recordService'])
+angular.module('recordCtrl', ['recordService','msgService'])
     .controller('recordController', function($timeout, Record) {
         var vm = this;
         vm.processing = true;
@@ -16,63 +16,58 @@ angular.module('recordCtrl', ['recordService'])
                 vm.processing = false;
                 vm.records = data;
             });
-
+        // update only status field in record by _id
         vm.updateRecord = function(id, state) {
             var set = {};
             set.status = state;
             Record.update(id, set)
                 .success(function(data) {
-                    vm.show = true;
-                    vm.message = "!! Record Successfully Processed !!";
-                    $timeout(function() {
-                        vm.show = false;
-                    }, 6000)
+                   vm.show = true;
+                   vm.message = "!! Record Successfully Processed !!";
+                   msgService.hideMessage(); 
                 }).error(function(err) {
                     console.log(err);
                 })
         }
     })
-    // create new record controller
-    .controller('recordCreateController', function($timeout, Record) {
-        console.log('in recordCreateController');
+    // create new record, controller
+    .controller('recordCreateController', function($timeout, Record, msgService) {
         var vm = this;
         vm.type = "create";
         vm.show = false;
         vm.message = "";
-        vm.hideMessage = function() {
-            $timout(function() {
-                vm.show = false;
-            }, 6000);
-        };
-
+        // create new record 
         vm.insertRecord = function() {
             Record.insert(vm.recData)
                 .success(function(data) {
                     vm.show = true;
                     vm.message = data.message;
                     vm.recData = {};
-                    vm.hideMessage();
+                    msgService.hideMessage();
                 });
         }
     })
-    // edit existing record controller 
-    .controller('recordUpdateController', function($scope, $filter, $routeParams, Record) {
+    // edit existing record, controller 
+    .controller('recordUpdateController', function($scope, $filter, $timeout, $routeParams, Record, msgService) {
         var vm = this;
         vm.type = "edit";
-
-        // $scope.$watch('recData.doc_date', function(newValue) {
-        //     $scope.recData.doc_date = $filter('date')(newValue, 'dd/MM/yyyy');
-        // });
-        // get record by id 
+        // get Record by _id
         Record.get($routeParams.id)
             .success(function(data) {
-                console.log(data);
                 vm.recData = data;
+                vm.recData.doc_date = new Date(data.doc_date);
             });
-
-        // update record     
-        vm.updateRecord = function() {
-
+        // update record by _id    
+        vm.insertRecord = function() {
+            if (vm.recData.length != 0) {
+                Record.edit($routeParams.id, vm.recData)
+                    .success(function(data) {
+                        console.log('ma ma');
+                        vm.show = true;
+                        vm.message = "!! Record Successfully Updated !!";
+                        vm.recData = {};
+                        msgService.hideMessage();
+                    })
+            }
         }
-
     });
