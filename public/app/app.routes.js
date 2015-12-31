@@ -36,6 +36,11 @@ angular.module('app.routes', ['ngRoute'])
 			controller: 'recordCreateController',
 			controllerAs: 'record'
 		})
+		.when('/records/:id',{
+			templateUrl: 'app/views/pages/records/newrecord.html',
+			controller: 'recordUpdateController',
+			controllerAs: 'record'
+		})
 		.when('/reports',{
 			templateUrl: 'app/views/pages/reports/reports.html'
 		});
