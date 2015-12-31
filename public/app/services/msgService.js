@@ -1,9 +1,10 @@
 angular.module('msgService', [])
-.factory('msgService', function ($timeout) {
-	var vm = this;
+.factory('msg', function ($timeout) {
+	
 	return {
-		hideMsg: function(){
+		hideMsg: function(){        // hide function for alerts-bootstrap
 			$timeout(function() {
+				  var vm = this;
                   vm.show = false;
             }, 6000)
 		}

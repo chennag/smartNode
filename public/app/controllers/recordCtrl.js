@@ -1,5 +1,5 @@
-angular.module('recordCtrl', ['recordService','msgService'])
-    .controller('recordController', function($timeout, Record) {
+angular.module('recordCtrl', ['recordService'])
+    .controller('recordController', function(Record) {
         var vm = this;
         vm.processing = true;
         vm.show = false;
@@ -11,6 +11,7 @@ angular.module('recordCtrl', ['recordService','msgService'])
             "name": "Processed",
             "code": "Processed"
         }];
+        // get all records from DB
         Record.all()
             .success(function(data) {
                 vm.processing = false;
@@ -22,16 +23,15 @@ angular.module('recordCtrl', ['recordService','msgService'])
             set.status = state;
             Record.update(id, set)
                 .success(function(data) {
-                   vm.show = true;
-                   vm.message = "!! Record Successfully Processed !!";
-                   msgService.hideMessage(); 
+                    vm.show = true;
+                    vm.message = data.message;
                 }).error(function(err) {
                     console.log(err);
                 })
         }
     })
     // create new record, controller
-    .controller('recordCreateController', function($timeout, Record, msgService) {
+    .controller('recordCreateController', function(Record, $timeout) {
         var vm = this;
         vm.type = "create";
         vm.show = false;
@@ -43,12 +43,11 @@ angular.module('recordCtrl', ['recordService','msgService'])
                     vm.show = true;
                     vm.message = data.message;
                     vm.recData = {};
-                    msgService.hideMessage();
                 });
         }
     })
     // edit existing record, controller 
-    .controller('recordUpdateController', function($scope, $filter, $timeout, $routeParams, Record, msgService) {
+    .controller('recordUpdateController', function($routeParams, Record) {
         var vm = this;
         vm.type = "edit";
         // get Record by _id
@@ -62,11 +61,9 @@ angular.module('recordCtrl', ['recordService','msgService'])
             if (vm.recData.length != 0) {
                 Record.edit($routeParams.id, vm.recData)
                     .success(function(data) {
-                        console.log('ma ma');
                         vm.show = true;
-                        vm.message = "!! Record Successfully Updated !!";
+                        vm.message = data.message;
                         vm.recData = {};
-                        msgService.hideMessage();
                     })
             }
         }
