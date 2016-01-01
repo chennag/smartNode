@@ -1,3 +1,5 @@
+"use strict";
+
 var bodyParser = require('body-parser'),
     moment     = require('moment'),
     User       = require('../models/user'),

@@ -1,4 +1,21 @@
 angular.module('recordCtrl', ['recordService'])
+    // create new record, controller
+    .controller('recordCreateController', function(Record) {
+        var vm = this;
+        vm.type = "create";
+        vm.show = false;
+        vm.message = "";
+        
+        // create new record 
+        vm.insertRecord = function() {
+            Record.insert(vm.recData)
+                .success(function(data) {
+                    vm.show = true;
+                    vm.message = data.message;
+                    vm.recData = {};
+                });
+        }
+    })
     .controller('recordController', function(Record) {
         var vm = this;
         vm.processing = true;
@@ -28,22 +45,6 @@ angular.module('recordCtrl', ['recordService'])
                 }).error(function(err) {
                     console.log(err);
                 })
-        }
-    })
-    // create new record, controller
-    .controller('recordCreateController', function(Record, $timeout) {
-        var vm = this;
-        vm.type = "create";
-        vm.show = false;
-        vm.message = "";
-        // create new record 
-        vm.insertRecord = function() {
-            Record.insert(vm.recData)
-                .success(function(data) {
-                    vm.show = true;
-                    vm.message = data.message;
-                    vm.recData = {};
-                });
         }
     })
     // edit existing record, controller 

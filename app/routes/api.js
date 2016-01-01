@@ -1,3 +1,5 @@
+"use strict";
+
 var bodyParser = require('body-parser'),
     moment = require('moment'),
     jwt = require('jsonwebtoken'),
