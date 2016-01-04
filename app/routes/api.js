@@ -129,12 +129,12 @@ module.exports = function(app, express) {
             Record.findById(req.params.id, function(err, record) {
                 if (err) res.send(err);
                 if (req.body.status) {
-                    // sn.postRecords(record,function(error,response){
-                    // 	if(!err){
-                    // 		console.log(response);
-                    // 	}
-                    // 	else console.log(error)
-                    // });
+                    sn.postRecords(record,function(error,response){
+                    	if(!err){
+                    		console.log(response);
+                    	}
+                    	else console.log(error)
+                    });
                     record.status = req.body.status;
                 }
                 record.save(function(err) {
