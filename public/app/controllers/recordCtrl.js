@@ -1,11 +1,12 @@
 angular.module('recordCtrl', ['recordService'])
     // create new record, controller
-    .controller('recordCreateController', function(Record) {
+    .constant("states", ['Requested','Processed'])
+    .controller('recordCreateController', function(Record,states) {
         var vm = this;
         vm.type = "create";
         vm.show = false;
         vm.message = "";
-        
+        vm.states = states;  // angular constants
         // create new record 
         vm.insertRecord = function() {
             Record.insert(vm.recData)
@@ -16,18 +17,12 @@ angular.module('recordCtrl', ['recordService'])
                 });
         }
     })
-    .controller('recordController', function(Record) {
+    .controller('recordController', function(Record,states) {
         var vm = this;
         vm.processing = true;
         vm.show = false;
         vm.message = "";
-        vm.states = [{
-            "name": "Requested",
-            "code": "Requested"
-        }, {
-            "name": "Processed",
-            "code": "Processed"
-        }];
+        vm.states = states; // angular constants
         // get all records from DB
         Record.all()
             .success(function(data) {
@@ -35,22 +30,29 @@ angular.module('recordCtrl', ['recordService'])
                 vm.records = data;
             });
         // update only status field in record by _id
-        vm.updateRecord = function(id, state) {
+        vm.updateRecord = function(id) {
             var set = {};
-            set.status = state;
+            set.status = "Processed";
             Record.update(id, set)
                 .success(function(data) {
                     vm.show = true;
                     vm.message = data.message;
+                    // get all records from DB
+                    Record.all()
+                        .success(function(data) {
+                            vm.processing = false;
+                            vm.records = data;
+                        });
                 }).error(function(err) {
                     console.log(err);
                 })
         }
     })
     // edit existing record, controller 
-    .controller('recordUpdateController', function($routeParams, Record) {
+    .controller('recordUpdateController', function($routeParams, Record, states) {
         var vm = this;
         vm.type = "edit";
+        vm.states = states;  // angular constants
         // get Record by _id
         Record.get($routeParams.id)
             .success(function(data) {

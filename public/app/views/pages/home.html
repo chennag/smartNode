@@ -1,13 +1,11 @@
 <div class="jumbotron text-center home">
-	<h1>Welcome to the Smart Port Integration </h1>
-
-	<div ng-if="!main.loggedIn">
-		<p>Login to see manage your Records.</p>
-		<a href="/login" class="btn btn-primary">Login</a>
-	</div>
-
-	<div ng-if="main.loggedIn">
-		<p>Manage your Records.</p>
-		<a href="/records" class="btn btn-primary">View Records</a>
-	</div>
+    <h1>Welcome to the Smart Port</h1>
+    <div ng-if="!main.loggedIn">
+        <p>Login to see manage your Records.</p>
+        <a href="/login" class="btn btn-primary">Login</a>
+    </div>
+    <div ng-if="main.loggedIn">
+        <p>Manage your Records.</p>
+        <a href="/records" class="btn btn-primary">View Records</a>
+    </div>
 </div>

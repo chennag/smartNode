@@ -1,0 +1,14 @@
+<tr ng-repeat="rec in record.records">
+            <td class="hideid">{{ rec._id }}</td>
+            <td><a ng-href="/records/{{ rec._id }}">{{ rec.sanno }}<a/> </td>
+                <td>{{ rec.vessel_code }}</td>
+                <td>{{ rec.vessel_name }}</td>
+                <td>{{ rec.docnum }}</td>
+                <td>{{ rec.doc_date | date:'dd-MM-yyyy'}}</td>
+                <td>
+                    <select id="status_id" ng-options="state.code as state.name for state in record.states" ng-model="state" ng-init="state = rec.status">
+                    </select>
+                </td>
+                <td ng-if="rec.status == 'Requested'" ng-hide="record.message">
+                    <a href="#" ng-click="record.updateRecord(rec._id,state)" class="btn btn-default">Approve</a>
+            </td>
